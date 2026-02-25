@@ -85,6 +85,12 @@ for gd in game_definitions:
     p2 = '/'.join(game['p2']) if len(game['p2']) > 1 else game['p2'][0]
     output.append(f'Game {num} \u2013 {p1} vs. {p2}')
 
+# Append the BYU disclaimer from the filled template
+for line in filled.splitlines():
+    if line.startswith('*Should BYU'):
+        output.append('\n' + line)
+        break
+
 result = '\n'.join(output)
 print('\n')
 print(result)
