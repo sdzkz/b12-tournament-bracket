@@ -21,7 +21,7 @@ def format_date(d):
 days = {f'day{i+1}': format_date(start_date + timedelta(days=i)) for i in range(6)}
 
 # Read and fill the template
-with open('tournament-format.txt') as f:
+with open('TEMPLATE') as f:
     template = f.read()
 filled = template.format(**days)
 
@@ -31,7 +31,7 @@ for line in filled.splitlines():
     if line.startswith(('First Round', 'Second Round', 'Quarterfinals', 'Semifinals', 'Final')):
         round_names.append(line)
 
-with open('seeds.txt') as f:
+with open('SEEDS') as f:
     seeds = [line.strip() for line in f.readlines()]
 
 print(f"\nSeeding:\n------------------------")
