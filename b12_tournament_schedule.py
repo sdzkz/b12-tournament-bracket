@@ -85,6 +85,10 @@ for gd in game_definitions:
     p2 = '/'.join(game['p2']) if len(game['p2']) > 1 else game['p2'][0]
     output.append(f'Game {num} \u2013 {p1} vs. {p2}')
 
+result = '\n'.join(output)
 print('\n')
-print('\n'.join(output))
+print(result)
 print("\n")
+
+with open('response.txt', 'w') as f:
+    f.write(result + '\n')
