@@ -91,7 +91,30 @@ for line in filled.splitlines():
         output.append('\n' + line)
         break
 
-result = '\n'.join(output)
+# Build seeding lines with box
+inner_width = max(len(f'{i} - {s}') for i, s in enumerate(seeds, start=1))
+inner_width = max(inner_width, len('Seeding:'))
+box_width = inner_width + 4  # 2 padding each side
+
+seed_lines = ['', '']  # blank lines to offset down
+seed_lines.append('┌' + '─' * (box_width - 2) + '┐')
+for index, value in enumerate(seeds, start=1):
+    entry = f' {index} - {value}'
+    seed_lines.append('│' + entry.ljust(box_width - 2) + '│')
+seed_lines.append('└' + '─' * (box_width - 2) + '┘')
+
+# Merge schedule and seeding side by side
+schedule_lines = '\n'.join(output).split('\n')
+pad = 55
+
+merged = []
+total = max(len(schedule_lines), len(seed_lines))
+for i in range(total):
+    left = schedule_lines[i] if i < len(schedule_lines) else ''
+    right = seed_lines[i] if i < len(seed_lines) else ''
+    merged.append(f'{left:<{pad}}{right}')
+
+result = '\n'.join(line.rstrip() for line in merged)
 print('\n')
 print(result)
 print("\n")

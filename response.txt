@@ -1,23 +1,23 @@
 2026 Phillips 66 Big 12 Women’s Basketball Championship Schedule
 
-First Round – Wednesday, March 4
-Game 1 – BYU vs. Cincy
-Game 2 – Utah vs. Houston
-Game 3 – KSU vs. Arizona
-Game 4 – Kansas vs. UCF
-
-Second Round – Thursday, March 5
-Game 5 – Texas Tech vs. BYU/Cincy
-Game 6 – ASU vs. Utah/Houston
-Game 7 – Iowa St vs. KSU/Arizona
-Game 8 – OSU vs. Kansas/UCF
-
-Quarterfinals – Friday, March 6
-Game 9 – Colorado vs. Texas Tech/BYU/Cincy
-Game 10 – TCU vs. ASU/Utah/Houston
-Game 11 – Baylor vs. Iowa St/KSU/Arizona
-Game 12 – WV vs. OSU/Kansas/UCF
-
+First Round – Wednesday, March 4                       ┌────────────────┐
+Game 1 – BYU vs. Cincy                                 │ 1 - TCU        │
+Game 2 – Utah vs. Houston                              │ 2 - Baylor     │
+Game 3 – KSU vs. Arizona                               │ 3 - WV         │
+Game 4 – Kansas vs. UCF                                │ 4 - Colorado   │
+                                                       │ 5 - Texas Tech │
+Second Round – Thursday, March 5                       │ 6 - OSU        │
+Game 5 – Texas Tech vs. BYU/Cincy                      │ 7 - Iowa St    │
+Game 6 – ASU vs. Utah/Houston                          │ 8 - ASU        │
+Game 7 – Iowa St vs. KSU/Arizona                       │ 9 - Utah       │
+Game 8 – OSU vs. Kansas/UCF                            │ 10 - KSU       │
+                                                       │ 11 - Kansas    │
+Quarterfinals – Friday, March 6                        │ 12 - BYU       │
+Game 9 – Colorado vs. Texas Tech/BYU/Cincy             │ 13 - Cincy     │
+Game 10 – TCU vs. ASU/Utah/Houston                     │ 14 - UCF       │
+Game 11 – Baylor vs. Iowa St/KSU/Arizona               │ 15 - Arizona   │
+Game 12 – WV vs. OSU/Kansas/UCF                        │ 16 - Houston   │
+                                                       └────────────────┘
 Semifinals – Saturday, March 7
 Game 13 – Colorado/Texas Tech/BYU/Cincy vs. TCU/ASU/Utah/Houston
 Game 14 – Baylor/Iowa St/KSU/Arizona vs. WV/OSU/Kansas/UCF
