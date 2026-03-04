@@ -34,10 +34,6 @@ for line in filled.splitlines():
 with open('SEEDS') as f:
     seeds = [line.strip() for line in f.readlines()]
 
-print(f"\nSeeding:\n------------------------")
-for index, value in enumerate(seeds, start=1):
-    print(f"{index} - {value}")
-
 game_definitions = [
     {'number': 1, 'round': round_names[0], 'p1_source': {'seed': 12}, 'p2_source': {'seed': 13}},
     {'number': 2, 'round': round_names[0], 'p1_source': {'seed': 9}, 'p2_source': {'seed': 16}},
@@ -56,21 +52,55 @@ game_definitions = [
     {'number': 15, 'round': round_names[4], 'p1_source': {'game': 13}, 'p2_source': {'game': 14}},
 ]
 
+# Read TOURNAMENT results (each line = winner of that game number)
+winners = {}
+try:
+    with open('TOURNAMENT') as f:
+        for i, line in enumerate(f, start=1):
+            line = line.strip()
+            if line:
+                winners[i] = line
+except FileNotFoundError:
+    pass
+
+# First pass: build games to determine participants, track eliminated teams
+first_pass = {}
+eliminated = set()
+for gd in game_definitions:
+    num = gd['number']
+    if 'seed' in gd['p1_source']:
+        p1 = [seeds[gd['p1_source']['seed'] - 1]]
+    else:
+        prev = first_pass[gd['p1_source']['game']]
+        p1 = prev['p1'] + prev['p2']
+    if 'seed' in gd['p2_source']:
+        p2 = [seeds[gd['p2_source']['seed'] - 1]]
+    else:
+        prev = first_pass[gd['p2_source']['game']]
+        p2 = prev['p1'] + prev['p2']
+    first_pass[num] = {'p1': p1, 'p2': p2}
+    if num in winners:
+        winner = winners[num]
+        for t in p1 + p2:
+            if t != winner:
+                eliminated.add(t)
+
+# Second pass: rebuild games with eliminated teams filtered out
 games = {}
 for gd in game_definitions:
     num = gd['number']
-    p1 = []
     if 'seed' in gd['p1_source']:
         p1 = [seeds[gd['p1_source']['seed'] - 1]]
     else:
         prev = games[gd['p1_source']['game']]
         p1 = prev['p1'] + prev['p2']
-    p2 = []
     if 'seed' in gd['p2_source']:
         p2 = [seeds[gd['p2_source']['seed'] - 1]]
     else:
         prev = games[gd['p2_source']['game']]
         p2 = prev['p1'] + prev['p2']
+    p1 = [t for t in p1 if t not in eliminated]
+    p2 = [t for t in p2 if t not in eliminated]
     games[num] = {'round': gd['round'], 'p1': p1, 'p2': p2}
 
 output = [f'{start_date.year} Phillips 66 Big 12 Women\u2019s Basketball Championship Schedule']
@@ -81,9 +111,15 @@ for gd in game_definitions:
     if game['round'] != current_round:
         current_round = game['round']
         output.append("\n" + current_round)
-    p1 = '/'.join(game['p1']) if len(game['p1']) > 1 else game['p1'][0]
-    p2 = '/'.join(game['p2']) if len(game['p2']) > 1 else game['p2'][0]
-    output.append(f'Game {num} \u2013 {p1} vs. {p2}')
+    if num in winners:
+        fp = first_pass[num]
+        p1 = '/'.join(fp['p1']) if fp['p1'] else '?'
+        p2 = '/'.join(fp['p2']) if fp['p2'] else '?'
+        output.append(f'Game {num} \u2013 {p1} vs. {p2}')
+    else:
+        p1 = '/'.join(game['p1']) if game['p1'] else '?'
+        p2 = '/'.join(game['p2']) if game['p2'] else '?'
+        output.append(f'Game {num} \u2013 {p1} vs. {p2}')
 
 # Append the BYU disclaimer from the filled template
 for line in filled.splitlines():
@@ -115,9 +151,9 @@ for i in range(total):
     merged.append(f'{left:<{pad}}{right}')
 
 result = '\n'.join(line.rstrip() for line in merged)
-print('\n')
-print(result)
-print("\n")
 
 with open('response.txt', 'w') as f:
     f.write(result + '\n')
+
+import subprocess
+subprocess.run(['python3', 'scripts/show.py'])
