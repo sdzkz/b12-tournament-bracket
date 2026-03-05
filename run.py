@@ -164,4 +164,4 @@ with open('response.txt', 'w') as f:
     f.write(result + '\n')
 
 import subprocess
-subprocess.run(['python3', 'scripts/show.py'])
+subprocess.run(['python3', 'show.py'])
