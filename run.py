@@ -112,9 +112,17 @@ for gd in game_definitions:
         current_round = game['round']
         output.append("\n" + current_round)
     if num in winners:
-        fp = first_pass[num]
-        p1 = '/'.join(fp['p1']) if fp['p1'] else '?'
-        p2 = '/'.join(fp['p2']) if fp['p2'] else '?'
+        # Resolve actual participants (use winner of source game, not all candidates)
+        if 'seed' in gd['p1_source']:
+            p1 = seeds[gd['p1_source']['seed'] - 1]
+        else:
+            src = gd['p1_source']['game']
+            p1 = winners[src] if src in winners else '/'.join(first_pass[src]['p1'] + first_pass[src]['p2'])
+        if 'seed' in gd['p2_source']:
+            p2 = seeds[gd['p2_source']['seed'] - 1]
+        else:
+            src = gd['p2_source']['game']
+            p2 = winners[src] if src in winners else '/'.join(first_pass[src]['p1'] + first_pass[src]['p2'])
         output.append(f'Game {num} \u2013 {p1} vs. {p2}')
     else:
         p1 = '/'.join(game['p1']) if game['p1'] else '?'

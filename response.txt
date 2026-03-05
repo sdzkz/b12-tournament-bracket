@@ -7,7 +7,7 @@ Game 3 – ASU vs. Arizona                               │ 3 - Baylor     │
 Game 4 – Kansas vs. UCF                                │ 4 - OSU        │
                                                        │ 5 - Texas Tech │
 Second Round – Thursday, March 5                       │ 6 - Colorado   │
-Game 5 – Texas Tech vs. KSU/Cincy                      │ 7 - Iowa St    │
+Game 5 – Texas Tech vs. KSU                            │ 7 - Iowa St    │
 Game 6 – Utah vs. BYU                                  │ 8 - Utah       │
 Game 7 – Iowa St vs. ASU                               │ 9 - BYU        │
 Game 8 – Colorado vs. Kansas                           │ 10 - ASU       │
