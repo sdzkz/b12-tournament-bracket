@@ -68,16 +68,19 @@ for line in lines:
         dash_pos = left.find('– ')
         prefix = left[:dash_pos + 2]
         rest = left[dash_pos + 2:]
-        # If matchup is decided (both sides are single known teams), always show seeds
+        # Show seeds next to single decided teams in each slot
         if ' vs. ' in rest:
             sides = rest.split(' vs. ')
-            if len(sides) == 2 and '/' not in sides[0] and '/' not in sides[1] and '?' not in sides[0] and '?' not in sides[1]:
+            if len(sides) == 2:
                 for side_idx, side in enumerate(sides):
                     side = side.strip()
-                    if side in team_seed:
+                    is_single = '/' not in side and '?' not in side
+                    if is_single and side in team_seed:
                         seed = team_seed[side]
                         sides[side_idx] = f'{GREEN}{seed}{RESET} {side}'
                         seen_teams.add(side)
+                    else:
+                        sides[side_idx] = add_team_seeds(sides[side_idx])
                 rest = ' vs. '.join(sides)
             else:
                 rest = add_team_seeds(rest)
